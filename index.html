@@ -2,56 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LoanCalculator</title>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Lab 1</title>
     <script src="script.js"></script>
 </head>
 <body>
+    <h4>Завдання 1</h4>
+    <span>
+        Визначити, яка рівність точніша
+    </span><br/>
+
     <table>
         <tr>
-            <th>Enter Loan Data:</th>
-            <td></td>
-            <th>Loan Balance, Cumulative Equity and Interest Payments</th>
+            <td>Перша рівність</td>
+            <td><input name="fistTaskNumbers"></td>
         </tr>
         <tr>
-            <td>Amount of the loan ($):</td>
-            <td><input id="amount"></td>
-            <td rowspan="8">
-                <canvas id="graph" width="400" height="250"></canvas>
-            </td>
+            <td>Друга рівність</td>
+            <td><input name="fistTaskNumbers"></td>
         </tr>
         <tr>
-            <td>Annual interest (%):</td>
-            <td><input id="apr"></td>
-        </tr>
-        <tr>
-            <td>Repayment period (years):</td>
-            <td><input id="years"></td>
-        </tr>
-        <tr>
-            <td>Zipcode (to find lenders):</td>
-            <td><input id="zipcode"></td>
-        </tr>
-        <tr>
-            <th>Approximate Payments:</th>
-            <td><button id="calculateButton">Calculate</button></td>
-        </tr>
-        <tr>
-            <td>Monthly payment:</td>
-            <th>$<span class="output" id="payment"></span></th>
-        </tr>
-        <tr>
-            <td>Total payment:</td>
-            <th>$<span class="output" id="total"></span></th>
-        </tr>
-        <tr>
-            <td>Total interest:</td>
-            <th>$<span class="output" id="totalInterest"></span></th>
-        </tr>
-        <tr>
-            <td>Sponsors</td>
-            <td colspan="2">Apply for your loan with one of these fine lenders:<div id="landers"></div></td>
+            <td>Кількість цифр після коми</td>
+            <td><input id="lettersAfterDot"></td>
         </tr>
     </table>
+
+    <input id="countFirstTask" type="button" value="Підрахувати">
+    <input id="clearFirstAnswer" type="button" value="Стерти результат"><br/>
+    <span id="firstTaskAnswer"></span>
+
+
+    <h4>Завдання 2</h4>
+    <span>
+        Округлити сумнівні сумнівні цифри числа залишивши лише вірні знаки
+    </span><br/>
+    <input name="secondTaskChoice" type="radio" checked="checked" value="narrow">у вузькому розумінні<br/>
+    <input name="secondTaskChoice" type="radio" value="wide">у широкому розумінні<br/>
+
+    <table>
+        <tr>
+            <td>Введість число</td>
+            <td><input id="secondTaskNumber"></td>
+        </tr>
+        <tr>
+            <td>Абсолютна похибка</td>
+            <td><input id="absMistake"></td>
+        </tr>
+    </table>
+
+    <input id="countSecondTask" type="button" value="Підрахувати">
+    <input id="clearSecondAnswer" type="button" value="Стерти результат"><br/>
+    <span id="secondTaskAnswer"></span>
+
+
+    <h4>Завдання 3</h4>
+    <span>
+        Визначити граничні абсолютну та відносну похибку числа, якщо воно має лише вірні знаки
+    </span><br/>
+    <input name="thirdTaskChoice" type="radio" checked="checked" value="narrow">у вузькому розумінні<br/>
+    <input name="thirdTaskChoice" type="radio" value="wide">у широкому розумінні<br/>
+    Введість число <input id="thirdTaskNumber"><br>
+    <input id="countThirdTask" type="button" value="Підрахувати">
+    <input id="clearThirdAnswer" type="button" value="Стерти результат"><br/>
+    <span id="thirdTaskAnswer"></span>
+
 </body>
 </html>

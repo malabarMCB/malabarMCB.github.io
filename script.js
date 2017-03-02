@@ -1,170 +1,158 @@
-function calculate() {
-    var amount = document.getElementById("amount");
-    var apr = document.getElementById("apr");
-    var years = document.getElementById("years");
-    var zipcode = document.getElementById("zipcode");
-    var payment = document.getElementById("payment");
-    var total = document.getElementById("total");
-    var totalInterest = document.getElementById("totalInterest");
-    var principal = parseFloat(amount.value);
-    var interest = parseFloat(apr.value) / 100 / 12;
-    var payments = parseFloat(years.value) * 12;
-    var x = Math.pow(1 + interest, payments);
-    var monthly = (principal*x*interest)/(x-1);
-    if(isFinite(monthly)){
-        payment.innerText = monthly.toFixed(2);
-        total.innerHTML = (monthly * payments).toFixed(2);
-        totalInterest.innerHTML = ((monthly*payments)-principal).toFixed(2);
-        save(amount.value,apr.value, years.value,zipcode.value);
-        drowGraph(principal,interest,monthly,payments);
-        getLanders();
+window.onload=function () {
+    document.getElementById("countFirstTask").onclick=calculateFirst;
+    document.getElementById("clearFirstAnswer").onclick=function () {
+        document.getElementById("firstTaskAnswer").innerText='';
+    }
+
+    document.getElementById("countSecondTask").onclick=calculateSecond;
+    document.getElementById("clearSecondAnswer").onclick=function () {
+        document.getElementById("secondTaskAnswer").innerText='';
+    }
+
+    document.getElementById("countThirdTask").onclick=calculateThird;
+    document.getElementById("clearThirdAnswer").onclick=function () {
+        document.getElementById("thirdTaskAnswer").innerText='';
+    }
+
+}
+
+function calculateFirst() {
+    var answer=document.getElementById("firstTaskAnswer");
+    var expressionsStr=document.getElementsByName("fistTaskNumbers");
+    var expressions=[];
+    for(var i=0;i<expressionsStr.length;i++)
+        expressions[i]=expressionsStr[i].value;
+
+    var borderRelativeMistakes=[];
+    for(var i=0;i<expressions.length;i++)
+        borderRelativeMistakes[i]=calculate(expressions[i],i);
+    if(borderRelativeMistakes[0]<borderRelativeMistakes[1])
+        answer.innerText+=borderRelativeMistakes[0]+"<"+borderRelativeMistakes[1]+"\nПерша рівність точніша\n";
+    else if(borderRelativeMistakes[0]>borderRelativeMistakes[1])
+        answer.innerText+=borderRelativeMistakes[0]+">"+borderRelativeMistakes[1]+"\nДруга рівність точніша\n";
+
+
+    function calculate(expression,index) {
+        index++;
+        var parts=expression.split("=");
+        var exactValue;
+        var numberAmount=document.getElementById("lettersAfterDot").value;
+        if(/sqrt/.test(parts[0]))
+        {
+            var value=parseFloat(parts[0].match(/\d+/));
+            value=Math.sqrt(value);
+            exactValue=value.toFixed(numberAmount);
+        }
+        else if(/\//.test(parts[0]))
+        {
+            var pattern=/\d+/g;
+            var values=parts[0].match(pattern);
+            exactValue=(values[0]/values[1]).toFixed(numberAmount);
+        }
+
+        var difference=parseFloat(Math.abs(exactValue-parts[1]).toFixed(numberAmount));
+        var borderAbsMistake=(difference+1/Math.pow(10,numberAmount)).toFixed(numberAmount);
+        var borderRelativeMistake=getBorderRelativeMistake(borderAbsMistake,parts[1]);
+        var percent=+(borderRelativeMistake*10*10).toFixed(10);
+
+        answer.innerText+="a"+index+"="+parts[1]+"\n"+
+            "A"+index+"="+parts[0]+"="+exactValue+"\n"+
+            "|A"+index+"-a"+index+"= |"+exactValue+"-"+parts[1]+"|= "+difference+"<= "+borderAbsMistake+"\n"+
+            "△a"+index+"= "+difference+"\nГранична △a"+index+"= "+borderAbsMistake+"\n"+
+            "Гранична &a"+index+"= |гранична △a"+index+"/a"+index+"|= "+borderAbsMistake+"/"+parts[1]+"= "+
+            borderRelativeMistake+" ("+percent+"%)\n\n";
+
+        return borderRelativeMistake;
+    }
+}
+
+function calculateSecond() {
+    var number=parseFloat(document.getElementById("secondTaskNumber").value);
+    var absMistake=document.getElementById("absMistake").value;
+    var checked=getCheckedValue("secondTaskChoice");
+
+    var nonZeroCoord;
+    var borderAbsMistake;
+    if(checked=="narrow"){
+        nonZeroCoord=getFirstNonZeroCoord(5);
+        borderAbsMistake=0.5/Math.pow(10,nonZeroCoord--);
     }
     else{
-        payment.innerHTML='';
-        total.innerHTML='';
-        totalInterest.innerHTML='';
-        drowGraph();
+        nonZeroCoord=getFirstNonZeroCoord(1);
+        borderAbsMistake=0.1/Math.pow(10,nonZeroCoord);
+    }
+
+    var answer=document.getElementById("secondTaskAnswer");
+    absMistake=parseFloat(absMistake);
+    var i=1;
+    do{
+
+        if(i>1)
+            answer.innerText+=delta+">"+borderAbsMistake+"\n";
+        borderAbsMistake*=10;
+        var tmpNumber=parseFloat(number.toFixed(nonZeroCoord--));
+        var delta=+(absMistake+Math.abs(number-tmpNumber)).toFixed(7);
+
+        var a="a";
+        for(var j=0;j<i;j++)
+            a+="*";
+
+        answer.innerText+="\n"+absMistake+"<="+borderAbsMistake+"\n"+
+                a+"= "+tmpNumber+"\n"+
+                "△"+a+"= △a+△окр= "+absMistake+"+|"+number+"-"+tmpNumber+"|= "+delta+"\n";
+        i++;
+    }while (delta>=borderAbsMistake);
+    answer.innerText+=delta+"<="+borderAbsMistake+"\nВідповідь: "+tmpNumber+"\n";
+
+
+    function getFirstNonZeroCoord(n) {
+        for(var i=absMistake.length-1;i>1;i--){
+            var num=parseFloat(absMistake[i]);
+            if (n>num)
+                return i-1;
+        }
+
     }
 }
 
+function calculateThird() {
+    var number=document.getElementById("thirdTaskNumber").value;
+    var borderAbsMistake;
+    var stp;
 
-function save(amount,apr,years,zipcode) {
-    if(window.localStorage){
-        localStorage.amount=amount;
-        localStorage.apr=apr;
-        localStorage.years=years;
-        localStorage.zipcode=zipcode;
+    var checked=getCheckedValue("thirdTaskChoice");
+
+    if(checked=="narrow"){
+        stp=number.length-number.indexOf(".");
+        borderAbsMistake=5/Math.pow(10,stp);
     }
+    else {
+        stp=number.length-number.indexOf(".")-1;
+        borderAbsMistake=1/Math.pow(10,stp);
+    }
+
+    var borderRelativeMistake=getBorderRelativeMistake(borderAbsMistake,number);
+    var percent=+(borderRelativeMistake*10*10).toFixed(10);
+
+    document.getElementById("thirdTaskAnswer").innerText+="a= "+number+"\nгранична △a= "+
+        borderAbsMistake+"\nГранична &a=|гранична △a/a|= "+borderAbsMistake+"/"+
+            number+"= "+borderRelativeMistake+" ("+percent+"%)\n\n";
 }
 
-
-window.onload=function () {
-    document.getElementById('calculateButton').onclick=calculate;
-    if(window.localStorage && localStorage.amount){
-        document.getElementById("amount").value=localStorage.amount;
-        document.getElementById("apr").value=localStorage.apr;
-        document.getElementById("years").value=localStorage.years;
-        document.getElementById("zipcode").value=localStorage.zipcode;
-        calculate();
-    }
+function getCheckedValue(radioButtonsName) {
+    var choise=document.getElementsByName(radioButtonsName);
+    for(var i=0;i<choise.length;i++)
+        if(choise[i].checked)
+            return choise[i].value;
 }
 
-
-function drowGraph(principal,interest,monthly,payments) {
-    var graph=document.getElementById('graph');
-    graph.width=graph.width;//clear graph
-    if(arguments.length==0 || !graph.getContext)
-        return;
-    var context=graph.getContext('2d');
-    var width=graph.width;
-    var height=graph.height;
-    drowInterestPayments();
-    drowEquity();
-    drowBalance();
-    setMarkersX();
-    setMarkersY();
-
-
-    function drowInterestPayments() {
-        context.moveTo(paymentToX(0),amountToY(0));
-        context.lineTo(paymentToX(payments),amountToY(monthly*payments));
-        context.lineTo(paymentToX(payments),amountToY(0));
-        context.closePath();
-        context.fillStyle='#f88';
-        context.fill();
-        context.font='bold 12px san-serif';
-        context.fillText('Total Interest Payments',20,20);
-    }
-
-    function drowEquity() {
-        var equity=0;
-        context.beginPath();
-        context.moveTo(paymentToX(0),amountToY(0));
-        for(var i=1;i<payments;i++){
-            var thisMonthInterest=(principal-equity)*interest;
-            equity+=(monthly-thisMonthInterest);
-            context.lineTo(paymentToX(i),amountToY(equity));
+function getBorderRelativeMistake(borderAbsMistake,a) {
+    var result;
+    var borderRelativeMistake=Math.abs(borderAbsMistake/a).toString();
+    for(var i=2;borderRelativeMistake.length;i++)
+        if(borderRelativeMistake[i]!="0"){
+            result=parseFloat(parseFloat(borderRelativeMistake).toFixed(i));
+            break;
         }
-        context.lineTo(paymentToX(payments),amountToY(0));
-        context.closePath();
-        context.fillStyle='green';
-        context.fill();
-        context.fillText('Total Equity',20,35);
-    }
-
-
-    function drowBalance() {
-        var balance=principal;
-        context.beginPath();
-        context.moveTo(paymentToX(0),amountToY(balance));
-        for(var i=0;i<payments;i++){
-            var thisMonthInterest=balance * interest;
-            balance-=(monthly-thisMonthInterest);
-            context.lineTo(paymentToX(i),amountToY(balance));
-        }
-        context.lineWidth=3;
-        context.stroke();
-        context.fillStyle='black';
-        context.fillText('Loan Balance',20,50);
-    }
-
-    function setMarkersX() {
-        context.textAlign='center';
-        var y=amountToY(0);
-        for(var year=1;year*12<=payments;year++){
-            var x= paymentToX(year*12);
-            context.fillRect(x-0.5,y-3,1,3);
-            if(year==1)
-                context.fillText('Year',x,y-5);
-            if(year%5==0 && year*12!=payments)
-                context.fillText(String(year),x,y-5);
-
-        }
-    }
-
-
-    function setMarkersY() {
-        context.textAlign='right';
-        context.textBaseline='middle';
-        var ticks=[monthly*payments,principal];
-        var rightEdge=paymentToX(payments);
-        for(var i=0;i<ticks.length;i++){
-            var y=amountToY(ticks[i]);
-            context.fillRect(rightEdge-3,y-0.5,3,1);
-            context.fillText(String(ticks[i].toFixed(0)),rightEdge-5,y);
-        }
-    }
-
-
-    function paymentToX(value) {
-        return value * width / payments;
-    }
-
-
-    function amountToY(value) {
-        return height-(value*height/(monthly * payments * 1.05));
-    }
-}
-
-
-
-function getLanders() {
-    if(!window.XMLHttpRequest)
-        return;
-    var links=document.getElementById('landers');
-    if(!links)
-        return;
-    var request=new XMLHttpRequest();
-    request.open('GET','landers.json');
-    request.onreadystatechange=function () {
-        if(request.status==200 && request.readyState==4){
-            var response=request.responseText;
-            var landers=JSON.parse(response);
-            var list='';
-            for(var i=0;i<landers.length;i++)
-                list+='<li><a href="'+landers[i].url+'">'+landers[i].name+'</a></li>';
-            links.innerHTML='<ul>'+list+'</ul>'
-        }
-    }
-    request.send();
+    return result;
 }
