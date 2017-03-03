@@ -147,12 +147,13 @@ function getCheckedValue(radioButtonsName) {
 }
 
 function getBorderRelativeMistake(borderAbsMistake,a) {
-    var result;
     var borderRelativeMistake=Math.abs(borderAbsMistake/a).toString();
     for(var i=2;borderRelativeMistake.length;i++)
         if(borderRelativeMistake[i]!="0"){
-            result=parseFloat(parseFloat(borderRelativeMistake).toFixed(i));
-            break;
+            var result=borderRelativeMistake.substring(0,i+1);
+            var newNum=parseFloat(borderRelativeMistake[i+1])+1;
+            result+=newNum;
+            result=parseFloat(result);
+            return result;
         }
-    return result;
 }
