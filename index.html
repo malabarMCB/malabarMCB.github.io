@@ -1,69 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Lab 1</title>
-    <script src="script.js"></script>
+    <title>News monitor| EDIT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="edit.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h4>Завдання 1</h4>
-    <span>
-        Визначити, яка рівність точніша
-    </span><br/>
 
-    <table>
-        <tr>
-            <td>Перша рівність</td>
-            <td><input name="fistTaskNumbers"></td>
-        </tr>
-        <tr>
-            <td>Друга рівність</td>
-            <td><input name="fistTaskNumbers"></td>
-        </tr>
-        <tr>
-            <td>Кількість цифр після коми</td>
-            <td><input id="lettersAfterDot"></td>
-        </tr>
-    </table>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">News monitor</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <input id="countFirstTask" type="button" value="Підрахувати">
-    <input id="clearFirstAnswer" type="button" value="Стерти результат"><br/>
-    <span id="firstTaskAnswer"></span>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-md-2 sidenav">
+            <p><a href="#">News Source 1</a></p>
+            <p><a href="#">News Source 2</a></p>
+            <p><a href="#">News Source 3</a></p>
+        </div>
 
+        <div class="col-md-8 text-left">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputDate" class="col-md-2 control-label">Date</label>
+                    <div class="col-md-8">
+                        <input type="date" class="form-control" id="inputDate" placeholder="Date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputTitle" class="col-md-2 control-label">Title</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="inputTitle" placeholder="Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputKeyword" class="col-md-2 control-label">Keyword</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="inputKeyword" placeholder="Keyword">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDescription" class="col-md-2 control-label">Description</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="inputDescription" placeholder="Description">
+                    </div>
+                </div>
 
-    <h4>Завдання 2</h4>
-    <span>
-        Округлити сумнівні сумнівні цифри числа залишивши лише вірні знаки
-    </span><br/>
-    <input name="secondTaskChoice" type="radio" checked="checked" value="narrow">у вузькому розумінні<br/>
-    <input name="secondTaskChoice" type="radio" value="wide">у широкому розумінні<br/>
+                <div class="dropdown col-md-offset-2">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        News source dropdown
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" >
+                        <li><a role="menuitem" tabindex="-2" href="#">News source 1</a></li>
+                        <li><a role="menuitem" tabindex="-1" href="#">News source 2</a></li>
+                        <li><a role="menuitem" tabindex="-1" href="#">News source 3</a></li>
+                    </ul>
+                </div>
 
-    <table>
-        <tr>
-            <td>Введість число</td>
-            <td><input id="secondTaskNumber"></td>
-        </tr>
-        <tr>
-            <td>Абсолютна похибка</td>
-            <td><input id="absMistake"></td>
-        </tr>
-    </table>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" style="margin-top: 15px">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">News source articles</h3>
+                            </div>
 
-    <input id="countSecondTask" type="button" value="Підрахувати">
-    <input id="clearSecondAnswer" type="button" value="Стерти результат"><br/>
-    <span id="secondTaskAnswer"></span>
+                            <div class="list-group">
+                                <div class="input-group">
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">Article 1</h4>
+                                        <h6>09.12.2015</h6>
+                                        <p class="list-group-item-text">Some text from the article</p>
+                                    </a>
+                                    <span class="input-group-addon">
+                                        <input type="checkbox">
+                                    </span>
+                                </div>
+                            </div>
 
+                             <div class="list-group">
+                            <div class="input-group">
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">Article 2</h4>
+                                    <h6>03.12.2011</h6>
+                                    <p class="list-group-item-text">Some text from the article</p>
+                                </a>
+                                <span class="input-group-addon">
+                                        <input type="checkbox">
+                                    </span>
+                            </div>
+                        </div>
 
-    <h4>Завдання 3</h4>
-    <span>
-        Визначити граничні абсолютну та відносну похибку числа, якщо воно має лише вірні знаки
-    </span><br/>
-    <input name="thirdTaskChoice" type="radio" checked="checked" value="narrow">у вузькому розумінні<br/>
-    <input name="thirdTaskChoice" type="radio" value="wide">у широкому розумінні<br/>
-    Введість число <input id="thirdTaskNumber"><br>
-    <input id="countThirdTask" type="button" value="Підрахувати">
-    <input id="clearThirdAnswer" type="button" value="Стерти результат"><br/>
-    <span id="thirdTaskAnswer"></span>
+                            <div class="list-group">
+                                <div class="input-group">
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">Article 3</h4>
+                                        <h6>12.18.2015</h6>
+                                        <p class="list-group-item-text">Some text from the article</p>
+                                    </a>
+                                    <span class="input-group-addon">
+                                        <input type="checkbox">
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="list-group">
+                                <div class="input-group">
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">Article 4</h4>
+                                        <h6>11.12.2013</h6>
+                                        <p class="list-group-item-text">Some text from the article</p>
+                                    </a>
+                                    <span class="input-group-addon">
+                                        <input type="checkbox">
+                                    </span>
+                                </div>
+                            </div>
+
+                            <ul class="pagination pull-right" style="margin-top: 5px">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button type="submit" class="btn btn-default active">Add topic</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col-md-2 sidenav">
+            <div class="well">
+                <p>Some data</p>
+            </div>
+            <div class="well">
+                <p>Another data</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid text-center">
+    <p>Footer Text</p>
+</footer>
 
 </body>
 </html>
