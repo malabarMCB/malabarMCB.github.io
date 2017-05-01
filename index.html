@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>News monitor| EDIT</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>News monitor| Details</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="edit.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="details.css">
 </head>
 <body>
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -24,11 +23,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
             </ul>
         </div>
     </div>
@@ -43,101 +38,75 @@
         </div>
 
         <div class="col-md-8 text-left">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputDate" class="col-md-2 control-label">Date</label>
-                    <div class="col-md-8">
-                        <input type="date" class="form-control" id="inputDate" placeholder="Date">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputTitle" class="col-md-2 control-label">Title</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="inputTitle" placeholder="Title">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputKeyword" class="col-md-2 control-label">Keyword</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="inputKeyword" placeholder="Keyword">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputDescription" class="col-md-2 control-label">Description</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="inputDescription" placeholder="Description">
-                    </div>
-                </div>
+            <div class="row">
 
-                <div class="dropdown col-md-offset-2">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                        News source dropdown
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" >
-                        <li><a role="menuitem" tabindex="-2" href="#">News source 1</a></li>
-                        <li><a role="menuitem" tabindex="-1" href="#">News source 2</a></li>
-                        <li><a role="menuitem" tabindex="-1" href="#">News source 3</a></li>
-                    </ul>
-                </div>
+                <div class="col-md-10">
 
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1" style="margin-top: 15px">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">News source articles</h3>
+                    <div class="panel panel-default topmargin">
+                        <div class="panel-body">
+
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">01.01.2017</p>
                             </div>
 
-                            <div class="list-group">
-                                <div class="input-group">
-                                    <a href="#" class="list-group-item">
-                                        <h4 class="list-group-item-heading">Article 1</h4>
-                                        <h6>09.12.2015</h6>
-                                        <p class="list-group-item-text">Some text from the article</p>
-                                    </a>
-                                    <span class="input-group-addon">
-                                        <input type="checkbox">
-                                    </span>
-                                </div>
+                            <label class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">Some title</p>
                             </div>
 
-                             <div class="list-group">
-                            <div class="input-group">
-                                <a href="#" class="list-group-item">
-                                    <h4 class="list-group-item-heading">Article 2</h4>
-                                    <h6>03.12.2011</h6>
-                                    <p class="list-group-item-text">Some text from the article</p>
-                                </a>
-                                <span class="input-group-addon">
-                                        <input type="checkbox">
-                                    </span>
+                            <label class="col-sm-2 control-label">Keyword</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">bla-bla-bla</p>
                             </div>
+
+                            <label class="col-sm-2 control-label">Description</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">Another bla-bla-bla</p>
+                            </div>
+
                         </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Articles from topicname</h3>
+                        </div>
+                        <div class="panel-body">
 
                             <div class="list-group">
-                                <div class="input-group">
-                                    <a href="#" class="list-group-item">
-                                        <h4 class="list-group-item-heading">Article 3</h4>
-                                        <h6>12.18.2015</h6>
-                                        <p class="list-group-item-text">Some text from the article</p>
-                                    </a>
-                                    <span class="input-group-addon">
-                                        <input type="checkbox">
-                                    </span>
-                                </div>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span>NewsSource</h4>
+                                    <p class="list-group-item-text">Article topic</p>
+                                </a>
                             </div>
 
                             <div class="list-group">
-                                <div class="input-group">
-                                    <a href="#" class="list-group-item">
-                                        <h4 class="list-group-item-heading">Article 4</h4>
-                                        <h6>11.12.2013</h6>
-                                        <p class="list-group-item-text">Some text from the article</p>
-                                    </a>
-                                    <span class="input-group-addon">
-                                        <input type="checkbox">
-                                    </span>
-                                </div>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span>NewsSource</h4>
+                                    <p class="list-group-item-text">Article topic</p>
+                                </a>
+                            </div>
+
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span>NewsSource</h4>
+                                    <p class="list-group-item-text">Article topic</p>
+                                </a>
+                            </div>
+
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span>NewsSource</h4>
+                                    <p class="list-group-item-text">Article topic</p>
+                                </a>
+                            </div>
+
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span>NewsSource</h4>
+                                    <p class="list-group-item-text">Article topic</p>
+                                </a>
                             </div>
 
                             <ul class="pagination pull-right" style="margin-top: 5px">
@@ -149,17 +118,16 @@
                                 <li><a href="#">5</a></li>
                                 <li><a href="#">&raquo;</a></li>
                             </ul>
+
                         </div>
                     </div>
+
                 </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                        <button type="submit" class="btn btn-default active">Add topic</button>
-                    </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-block active topmargin">Edit</button>
                 </div>
-            </form>
-
+            </div>
         </div>
 
         <div class="col-md-2 sidenav">
@@ -176,6 +144,5 @@
 <footer class="container-fluid text-center">
     <p>Footer Text</p>
 </footer>
-
 </body>
 </html>
